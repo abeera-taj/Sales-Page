@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shoes Sale!</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" href="./favicon.png" type="image/png" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Pixelify+Sans:wght@400;500;600;700&family=Public+Sans:wght@300;400&family=Silkscreen&family=Work+Sans:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    ">
+  </head>
+  <body>
+    <h1>Shoes Sale</h1>
+    <h3>Limited Time Offer!</h3>
+    <p class="offerline" style="font-weight: bold; text-align: center">
+      This offer will end on 30th December 2023
+    </p>
+    <div class="img">
+      <img src="./converse.jpg" alt="Shoes image" />
+      <p class="description">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor odit,
+        illo maxime minus doloremque possimus, totam praesentium sapiente
+        repudiandae commodi veritatis harum? Voluptate in tenetur, ut nostrum
+        similique pariatur dicta, repellat veritatis perspiciatis eum adipisci
+        libero aliquam sed ex hic natus animi? Quis explicabo, nostrum porro
+        magnam tenetur quae deleniti.
+      </p>
+    </div>
+    <div class="timer">
+      <div id="day">Days</div>
+      <div id="hour">Hours</div>
+      <div id="min">Mins</div>
+      <div id="sec">Secs</div>
+    </div>
+    <script>
+      let totalMonths = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      let totalDays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+      let completeDate = new Date();
+      console.log(completeDate);
+      let currentDay = completeDate.getDay();
+      let currentHour = completeDate.getHours();
+      let currentMin = completeDate.getMinutes();
+      document.getElementById("day").innerHTML = currentDay + " Days";
+      document.getElementById("hour").innerHTML = currentHour + " Hours";
+      document.getElementById("min").innerHTML = currentMin + " Mins";
+      let futureDate = new Date(2023, 11, 31, 23, 59, 59);
+      console.log(futureDate);
+      let deadline = document.querySelector(".offerline");
+      deadline.textContent =
+        "The offer will end in" +
+        " " +
+        futureDate.getFullYear() +
+        " " +
+        totalMonths[futureDate.getMonth()] +
+        " " +
+        totalDays[futureDate.getDay()] +
+        " " +
+        futureDate.getDate() +
+        " " +
+        futureDate.getHours() +
+        ":" +
+        futureDate.getMinutes() +
+        ":" +
+        futureDate.getSeconds();
+
+      // Making function to get the remaining time
+      function getRemainingTime() {
+        let currentDate = new Date().getTime();
+        let rem = futureDate.getTime() - currentDate;
+        console.log(rem);
+        let oneDay = 24 * 60 * 60 * 1000;
+        let oneHour = 60 * 60 * 1000;
+        let oneMin = 60 * 1000;
+
+        let day = rem / oneDay;
+        day = Math.floor(day);
+        console.log(day);
+        let hour = Math.floor((rem % oneDay) / oneHour);
+        console.log(hour);
+        let min = Math.floor((rem % oneHour) / oneMin);
+        console.log(min);
+        let secs = Math.floor((rem % oneMin) / 1000);
+
+        // for adding preceding zero to values
+        function format(item) {
+          if (item < 10) {
+            return (item = "0${item}");
+          }
+          return item;
+        }
+
+        // Setting values for index
+        let remDay = document.querySelector("#day");
+        let remHour = document.querySelector("#hour");
+        let remMin = document.querySelector("#min");
+        let remSec = document.querySelector("#sec");
+        remDay.textContent = day + " Days";
+        remHour.textContent = hour + " Hours";
+        remMin.textContent = min + " Mins";
+        remSec.textContent = secs + " Secs";
+      }
+      getRemainingTime();
+    </script>
+  </body>
+</html>
